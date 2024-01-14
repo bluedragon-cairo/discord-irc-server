@@ -125,28 +125,27 @@ function onIRCChannelJoin(user, ircch) {
 	var it = timeout;
 	var cnt = 1;
 	
-	if(config.restorePreviousMessages)
-		channel.fetchMessages().then(_messages => {
-			const messages = [];
-			_messages.forEach(msg1 => messages.unshift(msg1));
-			messages.forEach(msg => {
-				var content = getContent(msg);
-				
-				const iuser = users[msg.author.id];
-				if(!iuser) {
-					if(msg.author.username.startsWith(config.prefix))
-						setTimeout(() => user.send(':' + filter(msg.author.username.replace(config.prefix, '')) + (config.preventAutoIgnore ? ('_' + (cnt++)) : '') + '!' + md5(msg.author.username).slice(0, 16) + (config.preventAutoIgnore ? ('_' + (cnt++)) : '') + '@discord.com', 'PRIVMSG', ircch.name, ':' + content), timeout);
-					else
-						return;
-				} else {
-					var mask = iuser.mask;
-					if(config.preventAutoIgnore)
-						mask = mask.replace('@discord.com', '_' + (cnt++) + '@discord.com').replace('!discord', '_' + (cnt++) + '!discord');
-					setTimeout(() => user.send(mask, 'PRIVMSG', ircch.name, ':' + content), timeout);
-				}
-				timeout += it;
-			});
-		}).catch(e => {});
+	channel.fetchMessages().then(_messages => {
+		const messages = [];
+		_messages.forEach(msg1 => messages.unshift(msg1));
+		messages.forEach(msg => {
+			var content = getContent(msg);
+			
+			const iuser = users[msg.author.id];
+			if(!iuser) {
+				if(msg.author.username.startsWith(config.prefix))
+					setTimeout(() => user.send(':' + filter(msg.author.username.replace(config.prefix, '')) + (config.preventAutoIgnore ? ('_' + (cnt++)) : '') + '!' + md5(msg.author.username).slice(0, 16) + (config.preventAutoIgnore ? ('_' + (cnt++)) : '') + '@discord.com', 'PRIVMSG', ircch.name, ':' + content), timeout);
+				else
+					return;
+			} else {
+				var mask = iuser.mask;
+				if(config.preventAutoIgnore)
+					mask = mask.replace('@discord.com', '_' + (cnt++) + '@discord.com').replace('!discord', '_' + (cnt++) + '!discord');
+				setTimeout(() => user.send(mask, 'PRIVMSG', ircch.name, ':' + content), timeout);
+			}
+			timeout += it;
+		});
+	}).catch(e => {});
 }
 
 client.login(config.token);
