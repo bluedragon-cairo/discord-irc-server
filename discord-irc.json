@@ -1,0 +1,16 @@
+{
+	"prefix": "[IRC] ",
+	"map": {
+		"DISCORD CHANNEL ID": "#IRC CHANNEL NAME",
+	},
+	"webhooks": {
+		"DISCORD CHANNEL ID": ["WEBHOOK ID", "WEBHOOK TOKEN"],
+	},
+	"token": "bot's token",
+	"restorePreviousMessages": true,
+	"preventAutoIgnore": false,
+	"host": "0.0.0.0",
+	"port": 6667,
+	"motd": "Message of the day",
+	"avatarType": "monsterid"
+}
