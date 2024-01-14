@@ -9,10 +9,10 @@ discord-irc.json example:
 {
 	"prefix": "[IRC] ",
 	"map": {
-		"DISCORD CHANNEL ID": "#IRC CHANNEL NAME",
+		"DISCORD CHANNEL ID": "#IRC CHANNEL NAME"
 	},
 	"webhooks": {
-		"DISCORD CHANNEL ID": ["WEBHOOK ID", "WEBHOOK TOKEN"],
+		"DISCORD CHANNEL ID": ["WEBHOOK ID", "WEBHOOK TOKEN"]
 	},
 	"token": "bot's token",
 	"restorePreviousMessages": true,
